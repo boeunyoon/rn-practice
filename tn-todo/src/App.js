@@ -1,24 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import SignInScreen from "./screens/SignInScreen";
-import TestAvoid from "./screens/TestAvoid";
-import { WHITE } from "./colors";
-
+import AuthStack from "./navigation/AuthStack";
+import { NavigationContainer } from "@react-navigation/native";
 const App = () => {
   return (
-    <View style={styles.container}>
+    <NavigationContainer>
       <StatusBar style="dark" />
-      <SignInScreen />
-      {/* <TestAvoid /> */}
-    </View>
+      <AuthStack/>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: WHITE,
-  },
-});
 
 export default App;

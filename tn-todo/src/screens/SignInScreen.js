@@ -17,12 +17,21 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
 import { signIn } from "../api/auth";
 
-const SignInScreen = () => {
+const SignInScreen = ({navigation, route}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const passwordRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    navigation.setOptions({
+      contentStyle : {
+        // backgroundColor : 'lightgray'
+      }
+    });
+  },[navigation])
+
   useEffect(() => {
     setDisabled(!email || !password);
   }, [email, password]);
@@ -33,6 +42,7 @@ const SignInScreen = () => {
       try {
         const data = await signIn(email, password);
         console.log(data);
+        navigation.push('List')
       } catch (e) {
         Alert.alert("Sigin in Error", e);
       }
