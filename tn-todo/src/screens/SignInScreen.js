@@ -6,31 +6,24 @@ import {
   SafeAreaView,
   StyleSheet,
   View,
-} from "react-native";
+} from 'react-native';
 import Input, {
   IconNames,
   KeyboardType,
   ReturnKeyTypes,
-} from "../components/Input";
-import SafeInputView from "../components/SafeInputView";
-import { useEffect, useRef, useState } from "react";
-import Button from "../components/Button";
-import { signIn } from "../api/auth";
+} from '../components/Input';
+import SafeInputView from '../components/SafeInputView';
+import { useEffect, useRef, useState } from 'react';
+import Button from '../components/Button';
+import { signIn } from '../api/auth';
+import PropTypes from 'prop-types';
 
-const SignInScreen = ({navigation, route}) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const SignInScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const passwordRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    navigation.setOptions({
-      contentStyle : {
-        // backgroundColor : 'lightgray'
-      }
-    });
-  },[navigation])
 
   useEffect(() => {
     setDisabled(!email || !password);
@@ -42,9 +35,9 @@ const SignInScreen = ({navigation, route}) => {
       try {
         const data = await signIn(email, password);
         console.log(data);
-        navigation.push('List')
+        navigation.push('List');
       } catch (e) {
-        Alert.alert("Sigin in Error", e);
+        Alert.alert('Sigin in Error', e);
       }
       setLoading(false);
     }
@@ -52,7 +45,7 @@ const SignInScreen = ({navigation, route}) => {
   return (
     <SafeInputView
       style={styles.avoid}
-      behavior={Platform.select({ ios: "padding" })}
+      behavior={Platform.select({ ios: 'padding' })}
     >
       <View style={styles.container}>
         {/* <Text>Sign in Screen</Text> */}
@@ -60,13 +53,13 @@ const SignInScreen = ({navigation, route}) => {
         {/* 사진 파일 뒤에 @2x와 같이 크기를 지정하여 이름을 지으면 기기에 맞춰 적절한 이미지를 자동으로 로드한다. */}
         {/* 리액트 네이티브는 dp라는 단위를 사용한다. 자동으로 적용 */}
         <Image
-          source={require("../../assets/main.png")}
+          source={require('../../assets/main.png')}
           style={styles.image}
-          resizeMode={"cover"}
+          resizeMode={'cover'}
         />
         <Input
-          title={"email"}
-          placeholder={"your@email.com"}
+          title={'email'}
+          placeholder={'your@email.com'}
           keyboardType={KeyboardType.EMAIL}
           returnKeyType={ReturnKeyTypes.NEXT}
           value={email}
@@ -76,8 +69,8 @@ const SignInScreen = ({navigation, route}) => {
         />
         <Input
           ref={passwordRef}
-          title={"password"}
-          placeholder={""}
+          title={'password'}
+          placeholder={''}
           keyboardType={KeyboardType.DEFAULT}
           returnKeyType={ReturnKeyTypes.DONE}
           secureTextEntry
@@ -87,7 +80,7 @@ const SignInScreen = ({navigation, route}) => {
         />
         <View style={styles.buttonContainer}>
           <Button
-            title={"LOGIN"}
+            title={'LOGIN'}
             onPress={onSubmit}
             disabled={disabled}
             loading={loading}
@@ -98,11 +91,15 @@ const SignInScreen = ({navigation, route}) => {
   );
 };
 
+SignInScreen.propTypes = {
+  navigation: PropTypes.object,
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
     width: 200,
@@ -112,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    width: "100%",
+    width: '100%',
     paddingHorizontal: 20,
     marginTop: 20,
   },

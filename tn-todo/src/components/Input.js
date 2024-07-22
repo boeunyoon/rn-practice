@@ -1,19 +1,19 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import PropTypes from "prop-types";
-import { BLACK, GRAY, PRIMARY } from "../colors";
-import { forwardRef, useState } from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import PropTypes from 'prop-types';
+import { BLACK, GRAY, PRIMARY } from '../colors';
+import { forwardRef, useState } from 'react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 export const KeyboardType = {
-  DEFAULT: "default",
-  EMAIL: "email-address",
+  DEFAULT: 'default',
+  EMAIL: 'email-address',
 };
 export const ReturnKeyTypes = {
-  DONE: "done",
-  NEXT: "next",
+  DONE: 'done',
+  NEXT: 'next',
 };
 export const IconNames = {
-  EMAIL: "email",
-  PASSWORD: "lock",
+  EMAIL: 'email',
+  PASSWORD: 'lock',
 };
 const Input = forwardRef(
   (
@@ -49,13 +49,14 @@ const Input = forwardRef(
               styles.input,
               value && styles.hasValueInput,
               isFocus && styles.focusedInput,
+              !isFocus && styles.focusedInput1,
             ]}
             ref={ref}
             placeholder={placeholder ?? title}
             placeholderTextColor={GRAY.DEFAULT}
-            autoCapitalize={"none"}
+            autoCapitalize={'none'}
             autoCorrect={false}
-            textContentType={"none"}
+            textContentType={'none'}
             onChangeText={onChangeText}
             onBlur={() => setIsFocus(false)}
             onFocus={() => setIsFocus(true)}
@@ -93,7 +94,7 @@ Input.propTypes = {
 };
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: '100%',
     paddingHorizontal: 20,
     marginVertical: 10,
   },
@@ -107,7 +108,11 @@ const styles = StyleSheet.create({
   },
   focusedInput: {
     borderWidth: 2,
-    color: PRIMARY.DEFAULT,
+    color: BLACK,
+  },
+  focusedInput1: {
+    borderWidth: 2,
+    color: BLACK,
   },
   input: {
     borderWidth: 1,
@@ -124,10 +129,10 @@ const styles = StyleSheet.create({
     color: BLACK,
   },
   icon: {
-    position: "absolute",
+    position: 'absolute',
     left: 8,
-    height: "100%",
-    justifyContent: "center",
+    height: '100%',
+    justifyContent: 'center',
   },
 });
 export default Input;
